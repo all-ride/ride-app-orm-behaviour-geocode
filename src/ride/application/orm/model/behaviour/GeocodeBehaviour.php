@@ -40,8 +40,12 @@ class GeocodeBehaviour extends AbstractBehaviour {
             return;
         }
 
-        $address = $entry->getGeocodeAddress();
+        $address = trim($entry->getGeocodeAddress());
         if (!$address) {
+            // no address, no coordinates
+            $entry->setLatitude(null);
+            $entry->setLongitude(null);
+
             return;
         }
 
@@ -49,13 +53,18 @@ class GeocodeBehaviour extends AbstractBehaviour {
 
         $geocodeResults = $geocoder->geocode($this->geocoderService, $address);
         foreach ($geocodeResults as $geocodeResult) {
+            // coordinate found
             $coordinate = $geocodeResult->getCoordinate();
 
             $entry->setLatitude($coordinate->getLatitude());
             $entry->setLongitude($coordinate->getLongitude());
 
-            break;
+            return;
         }
+
+        // no coordinate found
+        $entry->setLatitude(null);
+        $entry->setLongitude(null);
     }
 
 }
