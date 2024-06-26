@@ -1,5 +1,4 @@
 {
-    "version": "1.1",
     "name": "ride/app-orm-behaviour-geocode",
     "description": "Geocode behaviour for the Ride ORM.",
     "license": "MIT",
