@@ -17,6 +17,7 @@ use \InvalidArgumentException;
  * Setup the geocode behaviour based on the model options
  */
 class GeocodeBehaviourInitializer implements BehaviourInitializer {
+    protected $service;
 
     /**
      * Constructs a new instance
